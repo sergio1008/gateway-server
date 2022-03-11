@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: servicio-gateway-server
+  cloud:
+    gateway:
+      routes:
+      - id: greeting-microservice
+        uri: lb://greeting-microservice
+        predicates:
+          - Path=/greeting-service/**
+        filters:
+          - StripPrefix=1
+          
+server:
+  port: 8090
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+
